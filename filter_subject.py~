@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+import csv
+import sys
+import re
+import os
+
+y = csv.DictReader(sys.stdin)
+print(','.join(y.fieldnames))
+try:
+    for row in y:
+        for s in sys.argv[1:]:
+            if re.search(s, row['Subjects'], re.IGNORECASE):
+                print(','.join(v for _, v in row.items()))	
+except BrokenPipeError:
+    devnull = os.open(os.devnull, os.O_WRONLY)
+    os.dup2(devnull, sys.stdout.fileno())
+    sys.exit(1)
+
