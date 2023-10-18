@@ -1,0 +1,3 @@
+#/bin/bash
+
+tail -n -500 "$1" | head -n -400 | tr -cs '[:alnum:]' '[\n*]' | shuf -n $2
